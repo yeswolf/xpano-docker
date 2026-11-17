@@ -36,6 +36,15 @@ replacement is a separate, confirmed action.
 - 🧾 **Audit trail** — every replacement records source paths, trash paths, the
   published panorama, timestamps, and errors.
 
+## 📸 Screens
+
+<p align="center">
+  <img src="docs/screenshots/groups.png" alt="Watched folders and detected panorama groups" width="900">
+</p>
+
+The screenshot uses a synthetic demo library: watched folders on top, detected
+groups with cover thumbnails, confidence, and status below.
+
 ## ⚙️ How it works
 
 ```text
