@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Groups · pano-xpano{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">Panorama review</p>
+    <h1>Find the sweeps.<br>Keep the good frame.</h1>
+    <p class="lede">Add only the folders you want to test. Each folder keeps its
+      own photos, groups, and scan status, so you can work through the library
+      a piece at a time.</p>
+  </div>
+  <div class="hero-actions">
+    <button id="scan-all" class="button primary">Scan all folders</button>
+    <p class="hint">A scan never changes files. Replacement is a separate,
+      explicitly confirmed action.</p>
+  </div>
+</section>
+
+<section class="panel folders-panel">
+  <div class="panel-head">
+    <h2>Watched folders</h2>
+    <span id="folder-count" class="muted"></span>
+  </div>
+  <div class="folder-add">
+    <input id="folder-path" class="text-input" placeholder="2024 or 2024/05">
+    <button id="add-folder" class="button primary">Add folder</button>
+    <button id="browse-folder" class="button">Browse…</button>
+  </div>
+  <p class="hint">Only explicitly added folders are indexed. The library root
+    itself is not scanned automatically.</p>
+  <div id="folders" class="folder-grid"></div>
+  <p id="folders-empty" class="empty" hidden>No folders yet. Add a relative path
+    such as <code>2024</code> or use Browse.</p>
+</section>
+
+<section class="group-section">
+  <div class="group-head">
+    <div>
+      <p class="eyebrow">Detected groups</p>
+      <h2 id="groups-title">All folders</h2>
+    </div>
+    <label class="filter">
+      Folder
+      <select id="folder-filter">
+        <option value="">All folders</option>
+      </select>
+    </label>
+  </div>
+  <section class="stats" id="stats" hidden>
+    <div class="stat"><span id="stat-groups">0</span><label>groups</label></div>
+    <div class="stat"><span id="stat-photos">0</span><label>photos</label></div>
+    <div class="stat"><span id="stat-ready">0</span><label>stitched</label></div>
+  </section>
+  <section id="groups" class="group-grid" aria-live="polite"></section>
+  <p id="empty" class="empty" hidden>No candidate groups in this selection.</p>
+</section>
+
+<dialog id="browser-dialog" class="dialog">
+  <div class="dialog-head">
+    <h3>Choose a folder</h3>
+    <button id="browser-close" class="icon-button" aria-label="Close">×</button>
+  </div>
+  <div class="browser-path" id="browser-path">/</div>
+  <div class="browser-entries" id="browser-entries"></div>
+  <div class="form-actions">
+    <button id="browser-up" class="button">Up</button>
+    <button id="browser-use" class="button primary">Use this folder</button>
+  </div>
+</dialog>
+{% endblock %}
+{% block scripts %}
+<script>window.addEventListener("DOMContentLoaded", () => initIndex());</script>
+{% endblock %}

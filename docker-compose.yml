@@ -1,0 +1,28 @@
+services:
+  pano-xpano:
+    build: .
+    image: pano-xpano:latest
+    container_name: pano-xpano
+    restart: unless-stopped
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${PORT:-3040}:3040"
+    volumes:
+      - "${PHOTO_LIBRARY:-./photos}:/library"
+      - "${DATA_DIR:-./data}:/data"
+    environment:
+      - PANORAMA_LIBRARY_ROOT=/library
+      - PANORAMA_DATA_DIR=/data
+      - PANORAMA_XPANO_BIN=/usr/local/bin/Xpano
+      - PANORAMA_HOST=0.0.0.0
+      - PANORAMA_PORT=3040
+      - PANORAMA_OUTPUT_EXT=.jpg
+      - PANORAMA_STITCH_TIMEOUT=600
+      - PANORAMA_USE_XVFB=1
+    cpus: "2.00"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

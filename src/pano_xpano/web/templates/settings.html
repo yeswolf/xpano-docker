@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Settings · pano-xpano{% endblock %}
+{% block content %}
+<section class="detail-head">
+  <div class="detail-title"><h1>Detection settings</h1></div>
+  <p class="muted">Changes apply to the next scan. The library and data paths come
+    from the container mounts.</p>
+</section>
+
+<section class="panel settings-panel">
+  <div class="path-row"><span>Library</span><code>{{ settings.library_root }}</code></div>
+  <div class="path-row"><span>Data</span><code>{{ settings.data_dir }}</code></div>
+
+  <form id="settings-form" class="settings-form">
+    <label>Time window between shots (seconds)
+      <input type="number" name="time_window_s" min="1" max="600"
+             value="{{ settings.detection.time_window_s }}">
+    </label>
+    <label>Window when EXIF time is missing (seconds)
+      <input type="number" name="no_exif_window_s" min="1" max="600"
+             value="{{ settings.detection.no_exif_window_s }}">
+    </label>
+    <label>Minimum SIFT inliers
+      <input type="number" name="min_inliers" min="4" max="500"
+             value="{{ settings.detection.min_inliers }}">
+    </label>
+    <label>Minimum cumulative drift (fraction of frame)
+      <input type="number" name="drift_ratio" min="0.01" max="1" step="0.01"
+             value="{{ settings.detection.drift_ratio }}">
+    </label>
+    <label>Minimum pair translation (fraction of frame)
+      <input type="number" name="min_translation_ratio" min="0" max="1" step="0.005"
+             value="{{ settings.detection.min_translation_ratio }}">
+    </label>
+    <label>Maximum candidate pairs per scan
+      <input type="number" name="max_pairs" min="1" max="100000"
+             value="{{ settings.detection.max_pairs }}">
+    </label>
+    <div class="form-actions">
+      <button class="button primary" type="submit">Save settings</button>
+      <span id="settings-status" class="muted"></span>
+    </div>
+  </form>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>window.addEventListener("DOMContentLoaded", () => initSettings());</script>
+{% endblock %}

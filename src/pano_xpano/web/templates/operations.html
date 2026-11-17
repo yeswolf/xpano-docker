@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Operations · pano-xpano{% endblock %}
+{% block content %}
+<section class="detail-head">
+  <div class="detail-title"><h1>Replacement history</h1></div>
+  <p class="muted">Every completed replacement can be undone while its trash is intact.</p>
+</section>
+<div id="operations" class="operation-list"></div>
+<p id="operations-empty" class="empty" hidden>No replacements yet.</p>
+{% endblock %}
+{% block scripts %}
+<script>window.addEventListener("DOMContentLoaded", () => initOperations());</script>
+{% endblock %}

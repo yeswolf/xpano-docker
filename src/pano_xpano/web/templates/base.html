@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}pano-xpano{% endblock %}</title>
+  <link rel="stylesheet" href="/static/app.css?v={{ static_version }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">◎</span> pano<span class="brand-dot">·</span>xpano</a>
+    <nav>
+      <a href="/">Groups</a>
+      <a href="/operations">Operations</a>
+      <a href="/settings">Settings</a>
+    </nav>
+    <div class="library" title="{{ library if library else '' }}">{{ library if library else '' }}</div>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <div id="toast" class="toast" hidden></div>
+  <div id="jobbar" class="jobbar" hidden>
+    <div class="jobbar-text"><span id="job-label">working</span><span id="job-percent"></span></div>
+    <div class="progress"><div id="job-progress"></div></div>
+  </div>
+  <script src="/static/app.js?v={{ static_version }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
